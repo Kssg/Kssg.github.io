@@ -51,8 +51,9 @@
 
     .bubble {
       position: absolute;
-      bottom: 0;
-      left: 110%;
+      top: 10%;
+      left: 80%;
+      transform: translateX(10px);
       background: white;
       border-radius: 10px;
       padding: 10px 15px;
@@ -61,13 +62,15 @@
       color: #333;
       animation: fadeInUp 1.2s ease-out 0.8s forwards;
       opacity: 0;
+      white-space: nowrap;
     }
 
     .bubble::after {
       content: '';
       position: absolute;
       left: -10px;
-      bottom: 10px;
+      top: 50%;
+      transform: translateY(-50%);
       border: 10px solid transparent;
       border-right-color: white;
     }
@@ -76,10 +79,14 @@
 <body class="bg-anime min-h-screen flex items-center justify-center px-4 relative">
 
   <!-- 🌟 背景音樂 -->
-  <audio id="bgm" src="https://Kssg.github.io/assets/Einspanner.mp3" autoplay loop></audio>
+  <audio id="bgm" src="./assets/Einspanner.mp3" loop></audio>
+  <!-- 放在 body 裡面、靠右上角 -->
+    <button onclick="document.getElementById('bgm').play()" class="absolute top-4 right-4 z-20 bg-white/80 px-4 py-2 rounded-full">
+    ▶ 播放音樂
+    </button>   
 
   <!-- 🔈 靜音切換按鈕 -->
-  <button onclick="toggleMute()" class="absolute top-4 right-4 bg-white/80 backdrop-blur-md text-gray-800 px-4 py-2 rounded-full shadow hover:bg-white">
+  <button onclick="toggleMute()" class="absolute top-16 right-4 z-20 bg-white/80 backdrop-blur-md text-gray-800 px-4 py-2 rounded-full shadow hover:bg-white">
     🔈 音樂切換
   </button>
 
