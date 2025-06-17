@@ -1,12 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
-    </head>
-    <body>
-        Kssg HomePage
-    </body>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ようこそ！</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      overflow: hidden;
+    }
+
+    .bg-anime {
+      background-image: url('https://truth.bahamut.com.tw/s01/202506/89faae090746775ba8150f3e8f75dff0.JPG');
+      background-size: cover;
+      background-position: center;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in-up {
+      animation: fadeInUp 1.2s ease-out forwards;
+    }
+
+    /* 星星動畫 */
+    .star {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 2s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.8; transform: scale(1); }
+      50% { opacity: 0.2; transform: scale(1.5); }
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: 0;
+      left: 110%;
+      background: white;
+      border-radius: 10px;
+      padding: 10px 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      font-size: 16px;
+      color: #333;
+      animation: fadeInUp 1.2s ease-out 0.8s forwards;
+      opacity: 0;
+    }
+
+    .bubble::after {
+      content: '';
+      position: absolute;
+      left: -10px;
+      bottom: 10px;
+      border: 10px solid transparent;
+      border-right-color: white;
+    }
+  </style>
+</head>
+<body class="bg-anime min-h-screen flex items-center justify-center px-4 relative">
+
+  <!-- 🌟 背景音樂 -->
+  <audio id="bgm" src="https://Kssg.github.io/assets/Einspanner.mp3" autoplay loop></audio>
+
+  <!-- 🔈 靜音切換按鈕 -->
+  <button onclick="toggleMute()" class="absolute top-4 right-4 bg-white/80 backdrop-blur-md text-gray-800 px-4 py-2 rounded-full shadow hover:bg-white">
+    🔈 音樂切換
+  </button>
+
+  <!-- 🎇 星星動畫 -->
+  <div id="stars"></div>
+
+  <!-- 👧 角色 + 對話 + 文字框 -->
+  <div class="flex flex-col md:flex-row bg-white/70 backdrop-blur-md p-8 md:p-12 rounded-2xl shadow-2xl items-center animate-fade-in-up max-w-4xl relative z-10">
+    
+    <!-- 立繪 -->
+    <div class="relative">
+      <img src="https://truth.bahamut.com.tw/s01/202506/41e11a34c522a4185b18fe8e68270d58.PNG" alt="角色立繪" class="w-48 md:w-64 mb-6 md:mb-0 md:mr-10 drop-shadow-lg" />
+      <!-- 💬 對話泡泡 -->
+      <div class="bubble">
+        「やっと来たね！ずっと待ってたんだから～」
+      </div>
+    </div>
+
+    <!-- 歡迎文字 -->
+    <div class="text-center md:text-left">
+      <h1 class="text-4xl font-bold text-pink-600 mb-4">ようこそ！</h1>
+      <p class="text-gray-700 text-lg mb-6 leading-relaxed">
+        このサイトへようこそ～<br>
+        あなたの訪問を心から歓迎します 💖
+      </p>
+      <a href="#main" class="inline-block bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-full transition">はじめる</a>
+    </div>
+  </div>
+
+  <!-- JS 控制 -->
+  <script>
+    function toggleMute() {
+      const bgm = document.getElementById("bgm");
+      bgm.muted = !bgm.muted;
+    }
+
+    // 🎇 產生星星
+    const starContainer = document.getElementById("stars");
+    for (let i = 0; i < 40; i++) {
+      const star = document.createElement("div");
+      star.className = "star";
+      star.style.top = Math.random() * 100 + "vh";
+      star.style.left = Math.random() * 100 + "vw";
+      star.style.animationDuration = (1 + Math.random() * 2) + "s";
+      starContainer.appendChild(star);
+    }
+  </script>
+</body>
 </html>
